@@ -1,13 +1,27 @@
-// Easy Budget está pensado como una Web App para control de gastos y gestión de presupuestos para finanzas personales.
+/* Easy Client Account Manager está pensado como un gestor de cuentas corrientes dadas a clientes,
+ el cual permite ingresar los datos de los clientes, los retiros de mercaderia y los pagos de saldo.
+ */
+
+//Se va a generar la primer clase que nos permitirá dar de alta los clientes.
+
+class Cliente{
+    constructor(nombre,apellido,dni,domicilio){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.saldo = 0;
+    }
+}
 
 //Primero se pedirá una Registración o Logueo según corresponda
 
-
-
 alert("Antes de empezar por favor siga los pasos para crear una cuenta");
-
+// Aquí se establece las que serán las credenciales del usuario que hará el Data Entry.
 const usuarioAutorizado=prompt("Elija un nombre de Usuario para su cuenta");
 const contraAutorizada=prompt("Elija una contraseña para su cuenta");
+//Una vez hecho el registro, el usuario puede proceder a loguearse, para ello tendrá 3 intentos, de lo contrario finaliza la sesión.
+
 let intento = 2
 for(let i=1 ; i<=3 ; i++){
     let usuario = prompt("Ingrese su nombre de Usuario.");
@@ -31,6 +45,7 @@ for(let i=1 ; i<=3 ; i++){
         
     }
 }
+
 
 
 /*Una vez iniciada la sesion, ingresamos al menú principal.
@@ -119,6 +134,4 @@ function consultaSaldos(){
     console.log("Su saldo asignado a transporte es de $",transporte)
     console.log("Su saldo asignado a ahorro es de $",ahorro)
 }
-
-
 
