@@ -30,6 +30,7 @@ function input(){
 //Luego se crea el array vacío que tendrá los clientes.
 const clientes = [];
 
+//A partir de aquí comienza la ejecución del programa.
 //Primero se pedirá una Registración o Logueo según corresponda
 
 alert("Antes de empezar por favor siga los pasos para crear una cuenta");
