@@ -13,11 +13,11 @@
 //Se genera una clase que nos permitirá dar de alta los clientes.
 
 class Cliente{
-    constructor(nombre,apellido,dni,domicilio){
+    constructor(nombre,apellido,dni,mail){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.domicilio = domicilio;
+        this.mail = mail;
         this.saldo = 0;
     }
 
@@ -46,39 +46,51 @@ const abrirFormAlta = () =>{
     display.innerHTML= "";
     const form = document.createElement("div");
     form.classList.add("col-6", "col-md-6", "col-xl-6");
-    form.innerHTML =    `<div class="mb-3 mt-5">
-                            <label for="nombre" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre">
-                        </div>
-                        <div class="mb-3">
-                        <label for="apellido" class="form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="apellido" rows="3"></input>
-                        </div>
-                        <div class="mb-3">
-                        <label for="dni" class="form-label">DNI:</label>
-                        <input type="text" class="form-control" id="dni" rows="3"></input>
-                        </div>
-                        <div class="mb-3">
-                        <label for="mail" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="mail" rows="3" placeholder="nombre@ejemplo.com"></input>
-                        </div>
-                        <div class="mb-5">
-                        <button id="darDeAlta" class="btn btn-primary">Dar de Alta</button>
-                        </div>
-                     
+    form.innerHTML =    `<form id="formulario">
+                            <div class="mb-3 mt-5">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="apellido" class="form-label">Apellido:</label>
+                                <input type="text" id="apellido" class="form-control" id="apellido" rows="3"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dni" class="form-label">DNI:</label>
+                                <input type="text" id="dni" class="form-control" id="dni" rows="3"></input>
+                            </div>
+                            <div class="mb-3">
+                                <label for="mail"  class="form-label">Email:</label>
+                                <input type="email" class="form-control" id="mail" rows="3" placeholder="nombre@ejemplo.com"></input>
+                            </div>
+                            <div class="mb-5">
+                                <button id="darDeAlta" class="btn btn-primary">Dar de Alta</button>
+                            </div>
+                        </form>
                      `
     display.appendChild(form);
+    const formulario = document.getElementById("formulario");
+    formulario.addEventListener("submit", (e) =>{
+    e.preventDefault();
+    const nombre = document.getElementById("nombre");
+    const apellido = document.getElementById("apellido");
+    const dni = document.getElementById("dni");
+    const mail = document.getElementById("mail");
+
+    //creamos el objeto nuevo cliente
+    const nuevoCliente = new Cliente(nombre.value, apellido.value, dni.value, mail.value);
+    clientes.push(nuevoCliente);
+    console.log(clientes);
+    nombre.value = "";
+    apellido.value = "";
+    dni.value = "";
+    mail.value = "";
+})
 }
+
 //Creamos evento al hacer click en boton Nuevo Cliente para cargar el formulario.
 alta.addEventListener("click", () => {abrirFormAlta()});
 
-//Le asignamos la funcionalidad al boton Dar de Alta para que pushee el cliente a un array.
-const darDeAlta = document.getElementById("darDeAlta");
+//Vinculamos el formulario creado en html
 
-const altaCliente = () => {
-    //solicito al usuario los datos del cliente para pushearlo al array.
-    const nuevoCliente = new Cliente(nombre.value, apellido.value, dni.value, mail.value)
-    clientes.push(nuevoCliente);
-    console.log(clientes);
-}
-darDeAlta.addEventListener("submit", () =>{altaCliente()});
+
