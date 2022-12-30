@@ -2,6 +2,14 @@
  el cual permite ingresar los datos de los clientes, los retiros de mercaderia y los pagos de saldo.
  */
 
+ /*
+ Las funcionalidades del programa serán:
+ 1)Dar de alta clientes
+ 2)Consultar mi listado de clientes
+ 3)Modificar datos de clientes
+ 4)Registrar movimientos de Creditos o Debitos a los clientes.
+ 5)Dar de baja clientes.
+*/
 //Se genera una clase que nos permitirá dar de alta los clientes.
 
 class Cliente{
