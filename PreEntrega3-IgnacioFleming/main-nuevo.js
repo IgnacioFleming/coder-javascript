@@ -11,7 +11,7 @@
  5)Dar de baja clientes.
 */
 //Se genera una clase que nos permitirá dar de alta los clientes.
-
+let i = 1;
 class Cliente{
     constructor(nombre,apellido,dni,mail){
         this.nombre = nombre;
@@ -19,6 +19,8 @@ class Cliente{
         this.dni = dni;
         this.mail = mail;
         this.saldo = 0;
+        
+        this.id = i;
     }
 
     //Procedemos a crear los metodos necesarios para ajustar los saldos de las cuentas y consultar los mismos.
@@ -82,6 +84,8 @@ const abrirFormAlta = () =>{
 
     //creamos el objeto nuevo cliente
     const nuevoCliente = new Cliente(nombre.value, apellido.value, dni.value, mail.value);
+    nuevoCliente.id = i;
+    i = i + 1;
     clientes.push(nuevoCliente);
     nombre.value = "";
     apellido.value = "";
@@ -173,4 +177,68 @@ btnModificar.addEventListener("click", () => {
     
 })
 
+//3)Consulta de clientes.
+//Utilizaremos la funcion foreach para mostrar los clientes en una tabla.
+
+//Vinculamos primero el boton.
+const btnConsulta = document.getElementById("btnConsulta");
+btnConsulta.onclick = () => {
+    mostrarClientes();
+}
+
+//Funcion para mostrar los clientes.
+
+const mostrarClientes = () =>{
+    display.innerHTML = "";
+    const tabla = document.createElement("div");
+    tabla.classList.add("col-12", "col-md-12", "col-xl-12");
+    tabla.innerHTML = `
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">DNI</th>
+                                <th scope="col">Mail</th>
+                                <th scope="col">Saldo</th>
+                                <th scope="col">Accionable</th>
+                              </tr>
+                            </thead>
+                            <tbody id="tablaBody"></tbody>
+                        </table>
+                      `
+    display.appendChild(tabla);
+    const tablaBody = document.getElementById("tablaBody");
+    tablaBody.classList.add("col-12", "col-md-12", "col-xl-12");
+    clientes.forEach((cliente) => {
+        const tablaRow = document.createElement("tr");
+        tablaRow.innerHTML= `
+                                <th scope="row">${cliente.nombre}</th>
+                                <td>${cliente.apellido}</td>
+                                <td>${cliente.dni}</td>
+                                <td>${cliente.mail}</td>
+                                <td>${cliente.saldo}</td>
+                                <td><button class="btn btn-success" id="eliminar${cliente.id}">Eliminar</button></td>
+
+      `
+      tablaBody.appendChild(tablaRow);
+    
+    //Eliminar clientes
+    const eliminarCliente = document.getElementById(`eliminar${cliente.id}`);
+    eliminarCliente.onclick = () => {
+        borrarCliente(cliente.id);
+    }
+    console.log(clientes);
+})
+}
+
+
+//4)Dar de baja a los clientes.
+
+const borrarCliente = (id) => {
+    const clienteEliminado = clientes.find(cliente => cliente.id == id);
+    const indiceEliminado = clientes.indexOf(clienteEliminado);
+    clientes.splice(indiceEliminado, 1);
+    mostrarClientes();
+}
 
