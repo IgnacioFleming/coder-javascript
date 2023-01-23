@@ -27,7 +27,7 @@ class Cliente{
     mostrarSaldo = function(){
         console.log(`El saldo disponible del cliente ${this.nombre} ${this.apellido} es de $${this.saldo}`);
     }
-    acreditar = valor => this.saldo += valor;
+    acreditar (valor){this.saldo += valor};
     debitar = valor => this.saldo -= valor;
 }
 
@@ -193,7 +193,7 @@ const mostrarClientes = () =>{
     const tabla = document.createElement("div");
     tabla.classList.add("col-12", "col-md-12", "col-xl-12");
     tabla.innerHTML = `
-                        <table class="table">
+                        <table class="table mt-5">
                             <thead>
                               <tr>
                                 <th scope="col">Nombre</th>
@@ -202,6 +202,8 @@ const mostrarClientes = () =>{
                                 <th scope="col">Mail</th>
                                 <th scope="col">Saldo</th>
                                 <th scope="col">Accionable</th>
+                                <th scope="col">Credito</th>
+                                <th scope="col">Debito</th>
                               </tr>
                             </thead>
                             <tbody id="tablaBody"></tbody>
@@ -218,7 +220,9 @@ const mostrarClientes = () =>{
                                 <td>${cliente.dni}</td>
                                 <td>${cliente.mail}</td>
                                 <td>${cliente.saldo}</td>
-                                <td><button class="btn btn-success" id="eliminar${cliente.id}">Eliminar</button></td>
+                                <td><button class="btn btn-danger" id="eliminar${cliente.id}">Eliminar</button></td>
+                                <td><button class="btn btn-success" id="credito${cliente.id}">Acreditar</button></td>
+                                <td><button class="btn btn-warning" id="debito${cliente.id}">Debitar</button></td>
 
       `
       tablaBody.appendChild(tablaRow);
@@ -229,6 +233,16 @@ const mostrarClientes = () =>{
         borrarCliente(cliente.id);
     }
     console.log(clientes);
+    //Cargar Saldo
+    const credito = document.getElementById(`credito${cliente.id}`);
+    credito.onclick = () => {
+        sumarSaldo(cliente.id);
+    }
+    const debito = document.getElementById(`debito${cliente.id}`);
+    debito.onclick = () => {
+        restarSaldo(cliente.id);
+    }
+    
 })
 }
 
@@ -240,5 +254,71 @@ const borrarCliente = (id) => {
     const indiceEliminado = clientes.indexOf(clienteEliminado);
     clientes.splice(indiceEliminado, 1);
     mostrarClientes();
+}
+
+//Funcion acreditar
+const sumarSaldo = (id) =>{
+    display.innerHTML = "";
+    const formCredito = document.createElement("div");
+    formCredito.classList.add("col-12", "col-md-6", "col-xl-6");
+    formCredito.innerHTML = `<h2 class="mt-5">Ingrese el saldo a sumar:</h2>
+                            <form id="formularioCredito">
+                             <div class="mb-3 mt-5">
+                                 <input type="text" class="form-control" id="suma">
+                             </div>
+                             <div class="mb-5">
+                                 <button id="btnCredito" class="btn btn-primary">Imputar</button>
+                             </div>
+    </form>
+     `
+    display.appendChild(formCredito);
+    const clienteCredito = clientes.find(cliente => cliente.id == id);
+    const formularioCredito = document.getElementById("formularioCredito");
+    const suma = document.getElementById("suma");
+    console.log(suma);
+    formularioCredito.addEventListener("submit",(e) =>{
+        e.preventDefault();
+        clienteCredito.acreditar(parseFloat(suma.value));
+        console.log(clienteCredito);
+        formularioCredito.reset();
+    })
+ 
+    //Armamos la funcion de sumar saldo
+    /*const sumarSaldo = (id,suma) => {
+        const clienteCredito = clientes.find(cliente => cliente.id == id);
+        console.log(clienteCredito,clienteCredito.saldo);
+        clienteCredito.saldo += suma;
+    }*/
+}
+
+
+
+
+//Funcion debitar
+const restarSaldo = (id) =>{
+    display.innerHTML = "";
+    const formDebito = document.createElement("div");
+    formDebito.classList.add("col-12", "col-md-6", "col-xl-6");
+    formDebito.innerHTML = `<h2 class="mt-5">Ingrese el saldo a restar:</h2>
+                            <form id="formularioDebito">
+                             <div class="mb-3 mt-5">
+                                 <input type="text" class="form-control" id="resta">
+                             </div>
+                             <div class="mb-5">
+                                 <button id="btnDebito" class="btn btn-primary">Imputar</button>
+                             </div>
+    </form>
+     `
+    display.appendChild(formDebito);
+    const clienteDebito = clientes.find(cliente => cliente.id == id);
+    const formularioDebito = document.getElementById("formularioDebito");
+    const resta = document.getElementById("resta");
+    console.log(resta);
+    formularioDebito.addEventListener("submit",(e) =>{
+        e.preventDefault();
+        clienteDebito.debitar(parseFloat(resta.value));
+        console.log(clienteDebito);
+        formularioDebito.reset();
+    })
 }
 
