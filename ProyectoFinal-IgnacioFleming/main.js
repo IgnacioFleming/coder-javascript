@@ -11,28 +11,6 @@
  5)Dar de baja clientes.
 */
 //Se genera una clase que nos permitirá dar de alta los clientes.
-let i = 1;
-class Cliente{
-    constructor(nombre,apellido,dni,mail){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.mail = mail;
-        this.saldo = 0;
-        
-        this.id = i;
-    }
-
-    //Procedemos a crear los metodos necesarios para ajustar los saldos de las cuentas y consultar los mismos.
-    mostrarSaldo = function(){
-        console.log(`El saldo disponible del cliente ${this.nombre} ${this.apellido} es de $${this.saldo}`);
-    }
-    acreditar (valor){this.saldo += valor};
-    debitar = valor => this.saldo -= valor;
-}
-
-//Creamos el array que va a contener a nuestros clientes
-
 let clientes = []
 
 //Cargamos los datos almacenados en Local Storage si los hubiere.
@@ -40,6 +18,32 @@ let clientes = []
 if(localStorage.getItem("clientes")){
     clientes = JSON.parse(localStorage.getItem("clientes"));
 }
+
+
+class Cliente{
+    constructor(nombre,apellido,dni,mail){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.mail = mail;
+        this.saldo = 0;
+        this.id =clientes.length + 1;
+    }
+
+    //Procedemos a crear los metodos necesarios para ajustar los saldos de las cuentas y consultar los mismos.
+    mostrarSaldo = function(){
+        console.log(`El saldo disponible del cliente ${this.nombre} ${this.apellido} es de $${this.saldo}`);
+    }
+
+}
+
+
+let acreditar = (cliente,valor) => cliente.saldo += valor;
+let debitar = (cliente,valor) => cliente.saldo -= valor;
+
+//Creamos el array que va a contener a nuestros clientes
+
+
 
 //Creamos un div en el body donde se mostrará la información.
 const display = document.getElementById("display");
@@ -90,8 +94,6 @@ const abrirFormAlta = () =>{
 
     //creamos el objeto nuevo cliente
     const nuevoCliente = new Cliente(nombre.value, apellido.value, dni.value, mail.value);
-    nuevoCliente.id = i;
-    i = i + 1;
     clientes.push(nuevoCliente);
     localStorage.setItem("clientes", JSON.stringify(clientes));
     nombre.value = "";
@@ -238,13 +240,36 @@ const mostrarClientes = () =>{
     //Eliminar clientes
     const eliminarCliente = document.getElementById(`eliminar${cliente.id}`);
     eliminarCliente.onclick = () => {
-        borrarCliente(cliente.id);
+        Swal.fire({
+            title: "Está seguro de eliminar este cliente de la base?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "no, cancelar acción"
+        }).then((resultado)=> {
+            if(resultado.isConfirmed){
+                borrarCliente(cliente.id);
+                Swal.fire({
+                    title: "Cliente borrado",
+                    icon: "success",
+                })
+            }
+        })
+        
     }
     console.log(clientes);
     //Cargar Saldo
     const credito = document.getElementById(`credito${cliente.id}`);
+    console.log(credito);
     credito.onclick = () => {
+        
         sumarSaldo(cliente.id);
+        /*Toastify({
+            text: "Acreditado!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right"
+        }).showToast();*/
     }
     const debito = document.getElementById(`debito${cliente.id}`);
     debito.onclick = () => {
@@ -282,12 +307,13 @@ const sumarSaldo = (id) =>{
      `
     display.appendChild(formCredito);
     const clienteCredito = clientes.find(cliente => cliente.id == id);
+    console.log(clienteCredito);
     const formularioCredito = document.getElementById("formularioCredito");
     const suma = document.getElementById("suma");
     console.log(suma);
     formularioCredito.addEventListener("submit",(e) =>{
         e.preventDefault();
-        clienteCredito.acreditar(parseFloat(suma.value));
+        acreditar(clienteCredito,parseFloat(suma.value));
         localStorage.setItem("clientes", JSON.stringify(clientes));
         console.log(clienteCredito);
         formularioCredito.reset();
