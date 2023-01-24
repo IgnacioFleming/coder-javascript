@@ -384,17 +384,15 @@ importar.addEventListener("click", () => {
                 clientes.push(cliente)
             });
             localStorage.setItem("clientes", JSON.stringify(clientes));
+            Swal.fire({
+                title:"Los clientes fueron importados con éxito",
+                icon:"success"
+            })
         })
         .catch(error =>{
             Swal.fire({
                 title: error,
                 icon: "error"
-            })
-        })
-        .finally(() => {
-            Swal.fire({
-                title:"Los clientes fueron importados con éxito",
-                icon:"success"
             })
         })
 })
