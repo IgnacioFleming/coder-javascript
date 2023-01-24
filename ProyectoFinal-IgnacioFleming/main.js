@@ -264,12 +264,7 @@ const mostrarClientes = () =>{
     credito.onclick = () => {
         
         sumarSaldo(cliente.id);
-        /*Toastify({
-            text: "Acreditado!",
-            duration: 2000,
-            gravity: "bottom",
-            position: "right"
-        }).showToast();*/
+   
     }
     const debito = document.getElementById(`debito${cliente.id}`);
     debito.onclick = () => {
@@ -317,6 +312,15 @@ const sumarSaldo = (id) =>{
         localStorage.setItem("clientes", JSON.stringify(clientes));
         console.log(clienteCredito);
         formularioCredito.reset();
+        Toastify({
+            text: "Acreditado!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "green",
+            }
+        }).showToast();
     })
  
     //Armamos la funcion de sumar saldo
@@ -352,10 +356,19 @@ const restarSaldo = (id) =>{
     console.log(resta);
     formularioDebito.addEventListener("submit",(e) =>{
         e.preventDefault();
-        clienteDebito.debitar(parseFloat(resta.value));
+        debitar(clienteDebito,parseFloat(resta.value));
         localStorage.setItem("clientes", JSON.stringify(clientes));
         console.log(clienteDebito);
         formularioDebito.reset();
+        Toastify({
+            text: "Debitado!",
+            duration: 2000,
+            gravity: "bottom",
+            position: "right",
+            style: {
+                background: "#C13A06",
+            }
+        }).showToast();
     })
 }
 
