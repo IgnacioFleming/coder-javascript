@@ -371,4 +371,31 @@ const restarSaldo = (id) =>{
         }).showToast();
     })
 }
+//Agregamos la funcionalidad de importar los clientes desde una base a través de fetch.
+
+//Vinculamos el botón para importar.
+const importar = document.getElementById("importar");
+importar.addEventListener("click", () => {
+    fetch("./json/clientes.json")
+        .then((respuesta) => respuesta.json())
+        .then((datos)=>{
+            datos.forEach(cliente =>{
+                cliente.saldo = parseFloat(cliente.saldo);
+                clientes.push(cliente)
+            });
+            localStorage.setItem("clientes", JSON.stringify(clientes));
+        })
+        .catch(error =>{
+            Swal.fire({
+                title: error,
+                icon: "error"
+            })
+        })
+        .finally(() => {
+            Swal.fire({
+                title:"Los clientes fueron importados con éxito",
+                icon:"success"
+            })
+        })
+})
 
