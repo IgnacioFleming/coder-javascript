@@ -32,51 +32,43 @@
         "id": "9994"
     },
     {
-        "nombre": "Juan",
-        "apellido": "Perez",
-        "dni": "12345678",
-        "mail": "jperez@gmail.com",
-        "saldo": "10000",
+        "nombre": "Luis",
+        "apellido": "Martinez",
+        "dni": "45258477",
+        "mail": "lmartinez@gmail.com",
+        "saldo": "-45000",
         "id": "9995"
     },
     {
-        "nombre": "Juan",
-        "apellido": "Perez",
-        "dni": "12345678",
-        "mail": "jperez@gmail.com",
-        "saldo": "10000",
+        "nombre": "Arturo",
+        "apellido": "Williams",
+        "dni": "25478948",
+        "mail": "awilliams@gmail.com",
+        "saldo": "-1800",
         "id": "9996"
     },
     {
-        "nombre": "Juan",
-        "apellido": "Perez",
-        "dni": "12345678",
-        "mail": "jperez@gmail.com",
-        "saldo": "10000",
+        "nombre": "Rodrigo",
+        "apellido": "Juncosa",
+        "dni": "15247996",
+        "mail": "rjuncosa@gmail.com",
+        "saldo": "32150",
         "id": "9997"
     },
     {
-        "nombre": "Juan",
-        "apellido": "Perez",
-        "dni": "12345678",
-        "mail": "jperez@gmail.com",
-        "saldo": "10000",
+        "nombre": "Martin",
+        "apellido": "Sosa",
+        "dni": "40158456",
+        "mail": "msosa@gmail.com",
+        "saldo": "2500",
         "id": "9998"
     },
     {
-        "nombre": "Juan",
-        "apellido": "Perez",
-        "dni": "12345678",
-        "mail": "jperez@gmail.com",
-        "saldo": "10000",
+        "nombre": "Luis",
+        "apellido": "Puig",
+        "dni": "8458789",
+        "mail": "lpuig@gmail.com",
+        "saldo": "-23850",
         "id": "9999"
-    },
-    {
-        "nombre": "Juan",
-        "apellido": "Perez",
-        "dni": "12345678",
-        "mail": "jperez@gmail.com",
-        "saldo": "10000",
-        "id": "10000"
     }
 ]
