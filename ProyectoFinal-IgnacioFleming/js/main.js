@@ -29,12 +29,6 @@ class Cliente{
         this.saldo = 0;
         this.id =clientes.length + 1;
     }
-
-    //Procedemos a crear los metodos necesarios para ajustar los saldos de las cuentas y consultar los mismos.
-    mostrarSaldo = function(){
-        console.log(`El saldo disponible del cliente ${this.nombre} ${this.apellido} es de $${this.saldo}`);
-    }
-
 }
 
 
@@ -125,7 +119,6 @@ btnModificar.addEventListener("click", () => {
         e.preventDefault();
         const dniModificar = document.getElementById("dniModificar");
         const clienteModificacion = clientes.find(cliente => cliente.dni === dniModificar.value);
-        console.log(clienteModificacion);
         const indiceCliente = clientes.indexOf(clienteModificacion);
         const modificarCliente = () => {
             display.innerHTML= "";
@@ -257,10 +250,8 @@ const mostrarClientes = () =>{
         })
         
     }
-    console.log(clientes);
     //Cargar Saldo
     const credito = document.getElementById(`credito${cliente.id}`);
-    console.log(credito);
     credito.onclick = () => {
         
         sumarSaldo(cliente.id);
@@ -302,15 +293,12 @@ const sumarSaldo = (id) =>{
      `
     display.appendChild(formCredito);
     const clienteCredito = clientes.find(cliente => cliente.id == id);
-    console.log(clienteCredito);
     const formularioCredito = document.getElementById("formularioCredito");
     const suma = document.getElementById("suma");
-    console.log(suma);
     formularioCredito.addEventListener("submit",(e) =>{
         e.preventDefault();
         acreditar(clienteCredito,parseFloat(suma.value));
         localStorage.setItem("clientes", JSON.stringify(clientes));
-        console.log(clienteCredito);
         formularioCredito.reset();
         Toastify({
             text: "Acreditado!",
@@ -322,13 +310,6 @@ const sumarSaldo = (id) =>{
             }
         }).showToast();
     })
- 
-    //Armamos la funcion de sumar saldo
-    /*const sumarSaldo = (id,suma) => {
-        const clienteCredito = clientes.find(cliente => cliente.id == id);
-        console.log(clienteCredito,clienteCredito.saldo);
-        clienteCredito.saldo += suma;
-    }*/
 }
 
 
@@ -353,12 +334,10 @@ const restarSaldo = (id) =>{
     const clienteDebito = clientes.find(cliente => cliente.id == id);
     const formularioDebito = document.getElementById("formularioDebito");
     const resta = document.getElementById("resta");
-    console.log(resta);
     formularioDebito.addEventListener("submit",(e) =>{
         e.preventDefault();
         debitar(clienteDebito,parseFloat(resta.value));
         localStorage.setItem("clientes", JSON.stringify(clientes));
-        console.log(clienteDebito);
         formularioDebito.reset();
         Toastify({
             text: "Debitado!",
@@ -381,7 +360,8 @@ importar.addEventListener("click", () => {
         .then((datos)=>{
             datos.forEach(cliente =>{
                 cliente.saldo = parseFloat(cliente.saldo);
-                clientes.push(cliente)
+                cliente.id = clientes.length + 1; 
+                clientes.push(cliente);
             });
             localStorage.setItem("clientes", JSON.stringify(clientes));
             Swal.fire({

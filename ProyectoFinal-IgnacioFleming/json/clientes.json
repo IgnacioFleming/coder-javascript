@@ -5,7 +5,7 @@
         "dni": "12345678",
         "mail": "jperez@gmail.com",
         "saldo": "10000",
-        "id": "9991"
+        "id": ""
     },
     {
         "nombre": "Paul",
@@ -13,7 +13,7 @@
         "dni": "36379468",
         "mail": "pgonzalez@gmail.com",
         "saldo": "58000",
-        "id": "9992"
+        "id": ""
     },
     {
         "nombre": "Pedro",
@@ -21,7 +21,7 @@
         "dni": "23847222",
         "mail": "ppicapiedra@gmail.com",
         "saldo": "182345",
-        "id": "9993"
+        "id": ""
     },
     {
         "nombre": "Pablo",
@@ -29,7 +29,7 @@
         "dni": "11257789",
         "mail": "pmarmol@gmail.com",
         "saldo": "2044",
-        "id": "9994"
+        "id": ""
     },
     {
         "nombre": "Luis",
@@ -37,7 +37,7 @@
         "dni": "45258477",
         "mail": "lmartinez@gmail.com",
         "saldo": "-45000",
-        "id": "9995"
+        "id": ""
     },
     {
         "nombre": "Arturo",
@@ -45,7 +45,7 @@
         "dni": "25478948",
         "mail": "awilliams@gmail.com",
         "saldo": "-1800",
-        "id": "9996"
+        "id": ""
     },
     {
         "nombre": "Rodrigo",
@@ -53,7 +53,7 @@
         "dni": "15247996",
         "mail": "rjuncosa@gmail.com",
         "saldo": "32150",
-        "id": "9997"
+        "id": ""
     },
     {
         "nombre": "Martin",
@@ -61,7 +61,7 @@
         "dni": "40158456",
         "mail": "msosa@gmail.com",
         "saldo": "2500",
-        "id": "9998"
+        "id": ""
     },
     {
         "nombre": "Luis",
@@ -69,6 +69,6 @@
         "dni": "8458789",
         "mail": "lpuig@gmail.com",
         "saldo": "-23850",
-        "id": "9999"
+        "id": ""
     }
 ]
